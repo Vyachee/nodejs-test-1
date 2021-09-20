@@ -1,0 +1,13 @@
+{
+  "name": "todoer-back",
+  "version": "1.0.0",
+  "dependencies": {
+    "express": "^4.16.4",
+    "mysql2": "^2.3.0",
+    "randomstring": "^1.2.1",
+    "sequelize": "^6.6.5"
+  },
+  "devDependencies": {
+    "express-session": "^1.17.2"
+  }
+}
