@@ -1,63 +1,15 @@
 const express = require('express'),
     randomString = require('randomstring'),
-    Sequelize = require('sequelize'),
-    sequelize = new Sequelize('api_todo', 'root', 'root', {
-        dialect: 'mysql',
-        host: '127.0.0.1'
-    }),
+    config = require('./config.js'),
+    sequelize = config.sequelize,
+    UserTask = require('./models/userTask').UserTask,
+    Task = require('./models/task').Task,
+    User = require('./models/user').User,
     app = express()
 
 const host = '127.0.0.1'
 const port = 1337
 
-
-// models
-const User = sequelize.define("user", {
-    id: {
-        type: Sequelize.INTEGER,
-        autoIncrement: true,
-        primaryKey: true,
-        allowNull: false
-    },
-    login: {
-        type: Sequelize.STRING,
-        allowNull: false
-    },
-    password: {
-        type: Sequelize.STRING,
-        allowNull: false
-    },
-    token: {
-        type: Sequelize.STRING,
-        allowNull: true
-    }
-})
-
-const Task = sequelize.define("task", {
-    id: {
-        type: Sequelize.INTEGER,
-        autoIncrement: true,
-        primaryKey: true,
-        allowNull: false
-    },
-    title: {
-        type: Sequelize.STRING,
-        allowNull: true
-    },
-    description: {
-        type: Sequelize.STRING,
-        allowNull: true
-    }
-})
-
-const UserTask = sequelize.define("usertask", {
-    id: {
-        type: Sequelize.INTEGER,
-        autoIncrement: true,
-        primaryKey: true,
-        allowNull: false
-    }
-})
 UserTask.belongsTo(Task)
 UserTask.belongsTo(User)
 
