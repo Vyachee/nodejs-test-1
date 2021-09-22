@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize'),
-    sequelize = new Sequelize('api_todo', 'root', 'root', {
+    sequelize = new Sequelize('api_todo', 'dev', 'P@ssw0rd', {
         dialect: 'mysql',
-        host: '127.0.0.1'
+        host: 'localhost'
     })
 
 module.exports.sequelize = sequelize

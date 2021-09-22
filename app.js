@@ -8,6 +8,7 @@ const User = require('./models/user').User;
 const userController = require('./controllers/userController');
 const tasksController = require('./controllers/tasksController');
 const tokenMiddleware = require('./middleware/tokenHandler');
+const cors = require("cors");
 
 const host = '127.0.0.1'
 const port = 1337
@@ -22,8 +23,13 @@ sequelize.sync().then(result => {
     console.log(error)
 })
 
+app.use(cors());
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
+
+app.get('/', function (req, res) {
+    return res.send('asd')
+})
 
 app.post('/register', userController.register)
 app.post('/login', userController.login)
