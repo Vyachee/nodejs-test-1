@@ -39,6 +39,7 @@ app.use(tokenMiddleware.checkToken)
 
 app.get('/getMyTasks', tasksController.getMyTasks)
 app.post('/createTask', tasksController.createTask)
+app.post('/deleteTask', tasksController.delete)
 
 app.listen(port, host, () => {
     console.log(`http://${host}:${port}`)

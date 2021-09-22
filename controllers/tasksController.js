@@ -6,7 +6,7 @@ exports.createTask = (req, res) => {
     const title = req.body['title']
     const description = req.body['description']
 
-    if(!title || !description) {
+    if (!title || !description) {
         res.status(422)
         return res.send(JSON.stringify({
             response: 'Поля title и description обязательны!'
@@ -52,4 +52,32 @@ exports.getMyTasks = (req, res) => {
 
         return res.send(JSON.stringify(result))
     })
+}
+
+exports.delete = (req, res) => {
+    try {
+        console.log('task id: ' + req.body['task_id'])
+        console.log('user id: ' + res.user)
+
+        Task.findOne({
+            where: {id: req.body['task_id']}
+        }).then(result => {
+
+            UserTask.destroy({
+                where: {
+                    taskId: req.body['task_id'],
+                    userId: req.user.id
+                }
+            }).then(result2 => {
+                return res.send(JSON.stringify({
+                    response: 'ok'
+                }))
+            })
+
+            result.destroy()
+        })
+    } catch (e) {
+        console.log(e)
+    }
+
 }
